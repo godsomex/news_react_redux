@@ -1,6 +1,6 @@
 import React from "react";
 
-const Posts = () => {
+const Posts = ({ post }) => {
   return (
     <div className="card">
       <img
@@ -9,7 +9,7 @@ const Posts = () => {
         alt=""
       />
       <div className="card-body">
-        <h5 className="card-title">Card title</h5>
+        <h5 className="card-title">{post.title}</h5>
         <p className="card-text">
           This card has supporting text below as a natural lead-in to additional
           content.
