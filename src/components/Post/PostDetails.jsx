@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 const PostDetails = props => {
   console.log(props); // the route component sends a props by default which includes the match.params.id and now it contains posts objects after mapstatetoprops
-  const id = props.match.params.id;
+  //const id = props.match.params.id;
   const { posts } = props;
   if (posts) {
     return (
@@ -26,7 +26,7 @@ const PostDetails = props => {
   } else {
     return (
       <div className="container">
-        {" "}
+       
         <h3>loading post</h3>
       </div>
     );

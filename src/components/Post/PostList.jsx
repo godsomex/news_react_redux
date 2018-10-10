@@ -10,8 +10,8 @@ const PostList = ({ posts }) => {
       {posts &&
         posts.map(post => {
           return (
-            <Link to={"/post/" + post.id}>
-              <Posts post={post} key={post.id} />
+            <Link to={"/post/" + post.id} key={post.id}>
+              <Posts post={post} />
             </Link>
           );
         })}
