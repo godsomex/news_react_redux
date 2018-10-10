@@ -1,5 +1,6 @@
 import React from "react";
 import Posts from "./Posts";
+import { Link } from "react-router-dom";
 const PostList = ({ posts }) => {
   //3. console.log(props); //we get three objects which represents our mocked data in our postReducer
   //const { posts } = props; //same thing with destructuring inside the argument / brackets
@@ -8,7 +9,11 @@ const PostList = ({ posts }) => {
     <div>
       {posts &&
         posts.map(post => {
-          return <Posts post={post} key={post.id} />;
+          return (
+            <Link to={"/post/" + post.id}>
+              <Posts post={post} key={post.id} />
+            </Link>
+          );
         })}
     </div>
   );
