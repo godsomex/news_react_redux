@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import Notifications from "./Notifications";
 import PostList from "../Post/PostList";
 import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
+
 class Dashboard extends Component {
   render() {
     //2. console.log(this.props); // this gives us list of objects including the post object from mapstateToprops
@@ -22,9 +25,13 @@ class Dashboard extends Component {
 }
 const mapStateToProps = state => {
   //1. console.log(state);// if we console state here we get two objects we have in our allReducers function in allreducers.js
-
+  // if we log out state after firestoreConnect connection we get objects from firebase db
+  console.log(state);
   return {
-    posts: state.post.posts
+    posts: state.firestore.ordered.post //to get the objects in the firebase database
   };
 };
-export default connect(mapStateToProps)(Dashboard);
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect([{ collection: "post" }])
+)(Dashboard);

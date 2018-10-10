@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Login from "./LoginLinks";
 import SignOutLinks from "./SignOutLinks";
+import { connect } from "react-redux";
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -27,4 +28,12 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+const mapStateToProps = state => {
+  console.log(state);
+  return {};
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(Navbar);
