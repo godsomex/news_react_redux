@@ -12,7 +12,7 @@ const Navbar = props => {
       <Link className="navbar-brand" to="/">
         TecHelp
       </Link>
-      {showNavLinks}
+
       <button
         className="navbar-toggler"
         type="button"
@@ -25,7 +25,9 @@ const Navbar = props => {
         <span className="navbar-toggler-icon" />
       </button>
 
-      <div className="collapse navbar-collapse" id="navbarSupportedContent" />
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        {showNavLinks}
+      </div>
     </nav>
   );
 };
