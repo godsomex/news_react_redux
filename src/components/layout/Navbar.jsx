@@ -3,14 +3,16 @@ import { Link } from "react-router-dom";
 import Login from "./LoginLinks";
 import SignOutLinks from "./SignOutLinks";
 import { connect } from "react-redux";
-const Navbar = () => {
+const Navbar = props => {
+  console.log(props.authentication.uid); // after loggin refresh, then u will see uid present in the authentication object
+  const { uid } = props.authentication;
+  const showNavLinks = uid ? <Login /> : <SignOutLinks />;
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link className="navbar-brand" to="/">
         TecHelp
       </Link>
-      <SignOutLinks />
-      <Login />
+
       <button
         className="navbar-toggler"
         type="button"
@@ -23,14 +25,18 @@ const Navbar = () => {
         <span className="navbar-toggler-icon" />
       </button>
 
-      <div className="collapse navbar-collapse" id="navbarSupportedContent" />
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        {showNavLinks}
+      </div>
     </nav>
   );
 };
 
 const mapStateToProps = state => {
   console.log(state);
-  return {};
+  return {
+    authentication: state.firebase.auth
+  };
 };
 
 export default connect(
