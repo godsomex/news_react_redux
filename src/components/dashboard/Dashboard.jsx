@@ -4,11 +4,19 @@ import PostList from "../Post/PostList";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
+import { Redirect } from "react-router-dom";
 
 class Dashboard extends Component {
   render() {
     //2. console.log(this.props); // this gives us list of objects including the post object from mapstateToprops
-    const { posts } = this.props;
+    const { posts, auth } = this.props;
+
+    // if (!auth.uid) {
+    //   return <Redirect to="/login" />;
+    // }
+
+    if (!auth.uid) return <Redirect to="/login" />;
+
     return (
       <div className="container">
         <div className="row">
@@ -28,7 +36,8 @@ const mapStateToProps = state => {
   // if we log out state after firestoreConnect connection we get objects from firebase db
   console.log(state);
   return {
-    posts: state.firestore.ordered.post //to get the objects in the firebase database
+    posts: state.firestore.ordered.post, //to get the objects in the firebase database
+    auth: state.firebase.auth
   };
 };
 export default compose(

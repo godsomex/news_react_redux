@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { LogIn } from "../../store/actions/authActions";
-
+import { Redirect } from "react-router-dom";
 class Login extends Component {
   state = {
     email: "",
@@ -20,7 +20,8 @@ class Login extends Component {
   };
   render() {
     console.log(this.props); // contains authentication object
-    const { authentication } = this.props;
+    const { authentication, auth } = this.props;
+    if (auth.uid) return <Redirect to="/" />;
     return (
       <div className="container">
         <form onSubmit={this.handleSubmit}>
@@ -63,7 +64,8 @@ class Login extends Component {
 const mapStateToProps = state => {
   console.log(state);
   return {
-    authentication: state.authentication.authError
+    authentication: state.authentication.authError,
+    auth: state.firebase.auth
   };
 };
 
