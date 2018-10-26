@@ -15,6 +15,11 @@ const SignInLinks = props => {
           Logout
         </a>
       </li>
+
+      <li className="profile-circle">
+        <span className="initials">{props.profile.initials}</span>
+      </li>
+
       <li className="nav-item dropdown">
         <NavLink
           className="nav-link dropdown-toggle"

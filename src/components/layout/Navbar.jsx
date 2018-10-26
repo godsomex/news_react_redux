@@ -1,12 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Login from "./LoginLinks";
+import SignInLinks from "./LoginLinks";
 import SignOutLinks from "./SignOutLinks";
 import { connect } from "react-redux";
 const Navbar = props => {
   console.log(props.authentication.uid); // after loggin refresh, then u will see uid present in the authentication object
   const { uid } = props.authentication;
-  const showNavLinks = uid ? <Login /> : <SignOutLinks />;
+  const { profile } = props;
+  const showNavLinks = uid ? (
+    <SignInLinks profile={profile} />
+  ) : (
+    <SignOutLinks />
+  );
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link className="navbar-brand" to="/">
@@ -35,7 +40,8 @@ const Navbar = props => {
 const mapStateToProps = state => {
   console.log(state);
   return {
-    authentication: state.firebase.auth
+    authentication: state.firebase.auth,
+    profile: state.firebase.profile
   };
 };
 
