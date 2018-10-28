@@ -18,7 +18,12 @@ export const createPost = post => {
 
     firestore
       .collection("post")
-      .add({ ...post, authorName: profile.username, authorId: authorId })
+      .add({
+        ...post,
+        authorName: profile.username,
+        authorId: authorId,
+        postedOn: new Date()
+      })
       .then(() => {
         dispatch({ type: "CREATE_POST", post });
       })

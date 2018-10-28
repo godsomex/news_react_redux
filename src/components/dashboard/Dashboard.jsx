@@ -8,12 +8,7 @@ import { Redirect } from "react-router-dom";
 
 class Dashboard extends Component {
   render() {
-    //2. console.log(this.props); // this gives us list of objects including the post object from mapstateToprops
-    const { posts, auth } = this.props;
-
-    // if (!auth.uid) {
-    //   return <Redirect to="/login" />;
-    // }
+    const { posts, auth, notifications } = this.props;
 
     if (!auth.uid) return <Redirect to="/login" />;
 
@@ -24,7 +19,7 @@ class Dashboard extends Component {
             <PostList posts={posts} />
           </div>
           <div className="col-12 col-md-5">
-            <Notifications />
+            <Notifications notifications={notifications} />
           </div>
         </div>
       </div>
@@ -37,10 +32,14 @@ const mapStateToProps = state => {
   console.log(state);
   return {
     posts: state.firestore.ordered.post, //to get the objects in the firebase database
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    notifications: state.firestore.ordered.notifications
   };
 };
 export default compose(
   connect(mapStateToProps),
-  firestoreConnect([{ collection: "post" }])
+  firestoreConnect([
+    { collection: "post", orderBy: ["postedOn", "desc"] },
+    { collection: "notifications", limit: 2, orderBy: ["time", "desc"] }
+  ])
 )(Dashboard);

@@ -1,6 +1,8 @@
 import React from "react";
+import moment from "moment";
 
 const Posts = ({ post }) => {
+  console.log(post);
   return (
     <div className="card ">
       <img
@@ -12,7 +14,9 @@ const Posts = ({ post }) => {
         <h5 className="card-title">{post.title}</h5>
         <p className="card-text">Posted by: {post.authorName}</p>
         <p className="card-text">
-          <small className="text-muted">Last updated 3 mins ago</small>
+          <small className="text-muted">
+            {moment(post.postedOn.toDate()).calendar()}
+          </small>
         </p>
       </div>
     </div>

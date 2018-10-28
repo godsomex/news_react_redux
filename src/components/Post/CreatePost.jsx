@@ -26,7 +26,7 @@ class CreatePost extends Component {
         <form onSubmit={this.handleSubmit}>
           <div className="form-row">
             <div className="form-group col-md-6">
-              <label htmlFor="title">Email</label>
+              <label htmlFor="title">Title of Post</label>
               <input
                 onChange={this.handleChange}
                 type="title"
